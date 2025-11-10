@@ -84,6 +84,8 @@ def main():
             else:
                 final = f"{name} is not a directory"
 
+        elif typed_text.startswith("getdir"):
+            final = dir
 
         else:
             final = typed_text

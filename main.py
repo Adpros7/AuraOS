@@ -42,6 +42,11 @@ def main():
             with open(f"c:/Users/{user}/AuraOS/{name}", "r") as f:
                 final = f.read()
 
+        elif typed_text.startswith("del "):
+            spl = typed_text.removeprefix("del ").split(" ")
+            name = spl[0]
+            os.remove(f"c:/Users/{user}/AuraOS/{name}")
+            final = f"file {name} deleted"
         else:
             final = typed_text
         text_box.insert(

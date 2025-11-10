@@ -10,10 +10,10 @@ def main():
 
     root = tk.Tk()
     root.title("AuraOS")
-    root.geometry("500x500")
+    root.geometry("1920x1080")
     root.configure(bg="#000000")
     text_box = tk.Text(root, bg="#000000", fg="#FFFFFF")
-    text_box.place(x=0, y=0, width=500, height=500)
+    text_box.place(x=0, y=0, relwidth=1, relheight=1)
 
     dir = base_dir  # persistent directory
 
@@ -61,6 +61,14 @@ def main():
                 final = f"navigated to {dir}"
             else:
                 final = f"directory {name} not found"
+
+        elif typed_text.startswith("edit "):
+            spl = typed_text.split(" ", 2)
+            name = spl[1]
+            edit = spl[2]
+            with open(os.path.join(dir, name), "w") as f:
+                f.write(edit)
+            final = f"file {name} edited"
 
         else:
             final = typed_text

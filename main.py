@@ -1,7 +1,10 @@
 import tkinter as tk
-
+import os
 
 def main():
+    user = os.getlogin()
+    if not os.path.exists(f"c:/Users/{user}/AuraOS"):
+        os.mkdir(f"c:/Users/{user}/AuraOS")
 
     root = tk.Tk()
     root.title("AuraOS")
@@ -22,8 +25,9 @@ def main():
         line_end = text_box.index("insert lineend")
         typed_text = text_box.get(line_start, line_end)
         print(typed_text)
-        if typed_text == "ls" or typed_text == "file":
-            final = "HHIIHIQBUBDIUBWU"
+        if typed_text == "ls":
+            final = str(os.listdir(f"c:/Users/{user}/AuraOS")).removeprefix("[").removesuffix("]").replace(",", "\n")
+            final = stri
         else:
             final = typed_text
         text_box.insert(

@@ -26,8 +26,22 @@ def main():
         typed_text = text_box.get(line_start, line_end)
         print(typed_text)
         if typed_text == "ls":
-            final = str(os.listdir(f"c:/Users/{user}/AuraOS")).removeprefix("[").removesuffix("]").replace(",", "\n")
-            final = stri
+            final = str(os.listdir(f"c:/Users/{user}/AuraOS")).removeprefix("[").removesuffix("]").replace(", ", "\n")
+
+        elif typed_text.startswith("file "):
+            spl = typed_text.removeprefix("file ").split(" ")
+            name = spl[0]
+            content = spl[1]
+            with open(f"c:/Users/{user}/AuraOS/{name}", "w") as f:
+                f.write(str(content))
+            final = f"file {name} created with content: {content} "
+
+        elif typed_text.startswith("read "):
+            spl = typed_text.removeprefix("read ").split(" ")
+            name = spl[0]
+            with open(f"c:/Users/{user}/AuraOS/{name}", "r") as f:
+                final = f.read()
+
         else:
             final = typed_text
         text_box.insert(

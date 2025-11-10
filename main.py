@@ -1,3 +1,4 @@
+import shutil
 import tkinter as tk
 import os
 
@@ -13,6 +14,7 @@ def main():
     root.geometry("1920x1080")
     root.configure(bg="#000000")
     text_box = tk.Text(root, bg="#000000", fg="#FFFFFF")
+    text_box.insert("end", "Welcome to AuraOS!\n")
     text_box.place(x=0, y=0, relwidth=1, relheight=1)
 
     dir = base_dir  # persistent directory
@@ -69,6 +71,19 @@ def main():
             with open(os.path.join(dir, name), "w") as f:
                 f.write(edit)
             final = f"file {name} edited"
+
+        elif typed_text.startswith("deldir "):
+            name = typed_text.split(" ", 1)[1]
+            target = os.path.join(dir, name)
+            if os.path.isdir(target):
+                try:
+                    shutil.rmtree(target)
+                    final = f"directory {name} deleted"
+                except Exception as e:
+                    final = f"failed to delete {name}: {e}"
+            else:
+                final = f"{name} is not a directory"
+
 
         else:
             final = typed_text
